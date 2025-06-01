@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Event Radar</string>
+    <string name="save_favorite">Aggiungi ai Preferiti</string>
+    <string name="event_image">Copertina evento</string>
+    <string name="back_btn">Torna alla home\n</string>
+    <string name="map_preview">Preview della mappa</string>
+</resources>
