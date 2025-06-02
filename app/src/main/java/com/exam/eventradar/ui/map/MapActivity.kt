@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.exam.eventradar.EventRadarApp
 import com.exam.eventradar.R
+import com.exam.eventradar.domain.models.Event
 import com.exam.eventradar.ui.main.MainViewModel
 import com.exam.eventradar.ui.main.MainViewModelFactory
 import com.exam.eventradar.utils.GeocodingUtils
@@ -28,6 +29,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var viewModel: MainViewModel
+    private var favoriteIds: Set<String> = emptySet()
+    private var isMapReady = false
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -51,16 +54,58 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             .setOnClickListener {
                 finish()
             }
+
+        // Osserva favoriteEvents UNA volta
+        viewModel.favoriteEvents.observe(this) { favorites ->
+            favoriteIds = favorites.map { it.id }.toSet()
+            if (isMapReady) {
+                viewModel.events.value?.let { updateMarkers(it) }
+            }
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        isMapReady = true
 
         val italyCenter = LatLng(44.1333, 12.2333)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
 
         checkLocationPermissionAndEnable()
-        loadEventsFromDB()
+
+        // ✅ Solo ora osserva gli eventi
+        viewModel.events.observe(this) { allEvents ->
+            if (isMapReady) {
+                updateMarkers(allEvents)
+            }
+        }
+    }
+
+    private fun updateMarkers(events: List<Event>) {
+        map.clear()
+
+        events.forEach { event ->
+            lifecycleScope.launch {
+                val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, event.location)
+                latLng?.let {
+                    val isFavorite = favoriteIds.contains(event.id)
+                    val title = if (isFavorite) "${event.name} (Preferito)" else event.name
+
+                    map.addMarker(
+                        MarkerOptions()
+                            .position(it)
+                            .title(title)
+                            .snippet(event.date)
+                            .icon(
+                                if (isFavorite)
+                                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
+                                else
+                                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                            )
+                    )
+                }
+            }
+        }
     }
 
     private fun checkLocationPermissionAndEnable() {
@@ -97,34 +142,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun loadEventsFromDB() {
-        viewModel.currentEvents.observe(this) { events ->
-            viewModel.favoriteEvents.observe(this) { favorites ->
-                val favoriteIds = favorites.map { it.id }.toSet()
-
-                events.forEach { event ->
-                    lifecycleScope.launch {
-                        val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, event.location)
-                        latLng?.let {
-                            val isFavorite = favoriteIds.contains(event.id)
-                            val title = if (isFavorite) "${event.name} (Preferito)" else event.name
-
-                            map.addMarker(
-                                MarkerOptions()
-                                    .position(it)
-                                    .title(title)
-                                    .snippet(event.date)
-                                    .icon(
-                                        if (isFavorite)
-                                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
-                                        else
-                                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
-                                    )
-                            )
-                        }
-                    }
-                }
-            }
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        isMapReady = false
     }
 }

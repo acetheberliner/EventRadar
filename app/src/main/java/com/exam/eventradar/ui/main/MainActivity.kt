@@ -47,7 +47,17 @@ class MainActivity : AppCompatActivity() {
         val editDate = findViewById<EditText>(R.id.editDate)
         val buttonFetch = findViewById<Button>(R.id.buttonFetch)
 
+        fun hideKeyboard() {
+            val view = currentFocus
+            if (view != null) {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
+
         buttonFetch.setOnClickListener {
+            hideKeyboard()
+
             val city = editCity.text.toString().trim()
             val date = editDate.text.toString().trim()
 
@@ -115,6 +125,31 @@ class MainActivity : AppCompatActivity() {
         buttonFavorites.setOnClickListener {
             val intent = Intent(this, FavoritesActivity::class.java)
             startActivity(intent)
+        }
+
+        val buttonReset = findViewById<Button>(R.id.buttonReset)
+
+        editDate.setOnClickListener {
+            // Apri il DatePicker
+            val calendar = java.util.Calendar.getInstance()
+            val datePicker = android.app.DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
+                    // Formatto in yyyy-MM-dd
+                    val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
+                    editDate.setText(selectedDate)
+                },
+                calendar.get(java.util.Calendar.YEAR),
+                calendar.get(java.util.Calendar.MONTH),
+                calendar.get(java.util.Calendar.DAY_OF_MONTH)
+            )
+            datePicker.show()
+        }
+
+        buttonReset.setOnClickListener {
+            editCity.text.clear()
+            editDate.text.clear()
+            viewModel.loadAllEvents()
         }
     }
 }
