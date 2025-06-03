@@ -9,6 +9,9 @@ data class EventEntity(
     val name: String,
     val date: String,
     val location: String,
-    val imageUrl: String,
+    val imageUrl: String?,
+    val description: String?,
+    val externalLink: String?,
+    val contacts: String?,
     val isFavorite: Boolean = false
 )

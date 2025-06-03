@@ -19,7 +19,10 @@ class EventRepository(
                 name = entity.name,
                 date = entity.date,
                 location = entity.location,
-                imageUrl = entity.imageUrl
+                imageUrl = entity.imageUrl,
+                description = entity.description,
+                externalLink = entity.externalLink,
+                contacts = entity.contacts
             )
         }
     }
@@ -38,7 +41,10 @@ class EventRepository(
                     date = event.date,
                     location = event.location,
                     imageUrl = event.imageUrl,
-                    isFavorite = old?.isFavorite ?: false // ✅ preserva lo stato
+                    description = event.description,
+                    externalLink = event.externalLink,
+                    contacts = event.contacts,
+                    isFavorite = old?.isFavorite ?: false
                 )
             }
 
@@ -65,6 +71,9 @@ class EventRepository(
                     date = event.date,
                     location = event.location,
                     imageUrl = event.imageUrl,
+                    description = event.description,
+                    externalLink = event.externalLink,
+                    contacts = event.contacts,
                     isFavorite = old?.isFavorite ?: false // ✅ anche qui preserva
                 )
             }
@@ -76,19 +85,6 @@ class EventRepository(
             Log.e("API", "Errore caricamento eventi generali: ${e.localizedMessage}")
         }
     }
-
-//    suspend fun saveEvent(event: Event) {
-//        val existing = eventDao.getEventById(event.id)
-//        val updated = EventEntity(
-//            id = event.id,
-//            name = event.name,
-//            date = event.date,
-//            location = event.location,
-//            imageUrl = event.imageUrl,
-//            isFavorite = existing?.isFavorite ?: false
-//        )
-//        eventDao.insertEvents(listOf(updated))
-//    }
 
     suspend fun setFavoriteStatus(eventId: String, isFavorite: Boolean) {
         eventDao.updateFavoriteStatus(eventId, isFavorite)
@@ -113,6 +109,9 @@ class EventRepository(
                     date = event.date,
                     location = event.location,
                     imageUrl = event.imageUrl,
+                    description = event.description,
+                    externalLink = event.externalLink,
+                    contacts = event.contacts,
                     isFavorite = old?.isFavorite ?: false
                 )
             }
@@ -134,7 +133,10 @@ class EventRepository(
                 name = it.name,
                 date = it.date,
                 location = it.location,
-                imageUrl = it.imageUrl
+                imageUrl = it.imageUrl,
+                description = it.description,
+                externalLink = it.externalLink,
+                contacts = it.contacts
             )
         }
     }
@@ -147,7 +149,10 @@ class EventRepository(
                 name = entity.name,
                 date = entity.date,
                 location = entity.location,
-                imageUrl = entity.imageUrl
+                imageUrl = entity.imageUrl,
+                description = entity.description,
+                externalLink = entity.externalLink,
+                contacts = entity.contacts
             )
         }
     }

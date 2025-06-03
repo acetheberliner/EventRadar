@@ -5,5 +5,8 @@ data class Event(
     val name: String,
     val date: String,
     val location: String,
-    val imageUrl: String
+    val imageUrl: String?,
+    val description: String?,
+    val externalLink: String?,
+    val contacts: String?
 )

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.exam.eventradar.data.local.db.dao.EventDao
 import com.exam.eventradar.data.local.entities.EventEntity
 
-@Database(entities = [EventEntity::class], version = 2)
+@Database(entities = [EventEntity::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
 
