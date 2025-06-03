@@ -30,7 +30,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var viewModel: MainViewModel
     private var favoriteIds: Set<String> = emptySet()
-    private var isMapReady = false
+    private var searchedCity: String? = null
+    private var isMapReady: Boolean = false
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -46,6 +47,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             MainViewModelFactory((application as EventRadarApp).repository)
         )[MainViewModel::class.java]
 
+        searchedCity = intent.getStringExtra("searched_city")
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -55,11 +58,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 finish()
             }
 
-        // Osserva favoriteEvents UNA volta
+        // 👇 Osserva i preferiti
         viewModel.favoriteEvents.observe(this) { favorites ->
             favoriteIds = favorites.map { it.id }.toSet()
             if (isMapReady) {
-                viewModel.events.value?.let { updateMarkers(it) }
+                updateMarkers()
             }
         }
     }
@@ -68,12 +71,24 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
         isMapReady = true
 
-        val italyCenter = LatLng(44.1333, 12.2333)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
+        if (!searchedCity.isNullOrBlank()) {
+            lifecycleScope.launch {
+                val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, searchedCity!!)
+                if (latLng != null) {
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
+                } else {
+                    val italyCenter = LatLng(44.1333, 12.2333)
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
+                }
+            }
+        } else {
+            val italyCenter = LatLng(44.1333, 12.2333)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
+        }
 
         checkLocationPermissionAndEnable()
 
-        // ✅ Solo ora osserva gli eventi
+        // 👇 Osserva gli eventi
         viewModel.events.observe(this) { allEvents ->
             if (isMapReady) {
                 updateMarkers(allEvents)
@@ -81,7 +96,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun updateMarkers(events: List<Event>) {
+    private fun updateMarkers(events: List<Event> = viewModel.events.value ?: emptyList()) {
+        if (!isMapReady) return // Safety net
+
         map.clear()
 
         events.forEach { event ->
@@ -132,18 +149,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null && location.latitude != 37.422 && location.longitude != -122.084) {
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 10f))
-            } else {
-                val italyCenter = LatLng(44.1333, 12.2333)
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
+            // 👉 SOLO se non sto già mostrando una searchedCity faccio lo zoom su user
+            if (searchedCity.isNullOrBlank()) {
+                if (location != null && location.latitude != 37.422 && location.longitude != -122.084) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 10f))
+                } else {
+                    val italyCenter = LatLng(44.1333, 12.2333)
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(italyCenter, 5f))
+                }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        isMapReady = false
     }
 }
