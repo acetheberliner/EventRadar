@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.exam.eventradar.R
 import com.exam.eventradar.domain.models.Event
 import com.exam.eventradar.ui.details.EventDetailsActivity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class EventAdapter(private var events: List<Event>) :
     RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
@@ -20,11 +22,13 @@ class EventAdapter(private var events: List<Event>) :
         private val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         private val textViewDate: TextView = itemView.findViewById(R.id.textViewDate)
         private val textViewLocation: TextView = itemView.findViewById(R.id.textViewLocation)
+        private val textExpired: TextView = itemView.findViewById(R.id.textExpired)
+        private val textDetailsHint: TextView = itemView.findViewById(R.id.textDetailsHint)
 
         fun bind(event: Event) {
             textViewName.text = event.name
-            textViewDate.text = event.date
-            textViewLocation.text = event.location
+            textViewDate.text = "🗓 ${event.date}"
+            textViewLocation.text = "📍 ${event.location}"
 
             Glide.with(itemView.context)
                 .load(event.imageUrl)
@@ -32,6 +36,22 @@ class EventAdapter(private var events: List<Event>) :
                 .placeholder(R.drawable.placeholder_image)
                 .into(imageViewEvent)
 
+            // Controllo se evento è passato
+            val eventDate = try {
+                LocalDate.parse(event.date, DateTimeFormatter.ISO_LOCAL_DATE)
+            } catch (e: Exception) {
+                null
+            }
+
+            val today = LocalDate.now()
+
+            if (eventDate != null && eventDate.isBefore(today)) {
+                textExpired.visibility = View.VISIBLE
+            } else {
+                textExpired.visibility = View.GONE
+            }
+
+            // Click → Dettagli evento
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, EventDetailsActivity::class.java).apply {
                     putExtra("event_id", event.id)

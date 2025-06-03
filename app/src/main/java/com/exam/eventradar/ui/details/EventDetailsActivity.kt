@@ -88,7 +88,7 @@ class EventDetailsActivity : AppCompatActivity() {
     }
 
     private fun updateFavoriteUI() {
-        buttonSave.text = if (isFavorite) "Rimuovi" else "Preferito"
+        buttonSave.text = if (isFavorite) "Rimuovi" else "Aggiungi ai preferiti"
         buttonSave.setBackgroundColor(
             getColor(if (isFavorite) R.color.red else R.color.yellow)
         )

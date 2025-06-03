@@ -11,6 +11,7 @@
     <color name="green">#3E8C41</color>
     <color name="red">#D7766D</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="link">#9D0017BA</color>
     <color name="background">#EBE9E9</color>
     <color name="colorPrimary">#0179ab</color>
     <color name="colorPrimaryVariant">#017AAF</color>

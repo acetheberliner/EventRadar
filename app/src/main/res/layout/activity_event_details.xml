@@ -48,6 +48,8 @@
                     android:id="@+id/textViewDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:fontFamily="@font/gg_sans_regular"/>
@@ -66,6 +68,8 @@
                     android:id="@+id/textViewDetailDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
@@ -84,6 +88,8 @@
                     android:id="@+id/textViewDetailLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
@@ -102,6 +108,8 @@
                     android:id="@+id/textViewDetailDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
@@ -121,7 +129,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
-                    android:textColor="@color/colorAccent"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
+                    android:textColor="@color/link"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
 
@@ -140,7 +150,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="email"
-                    android:textColor="@color/black"
+                    android:background="@drawable/edittext_background"
+                    android:padding="6dp"
+                    android:textColor="@color/link"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
 
