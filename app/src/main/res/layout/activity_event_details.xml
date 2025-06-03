@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -34,33 +34,117 @@
                     android:contentDescription="@string/event_image"
                     android:background="@drawable/placeholder_image" />
 
+                <!-- NOME -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Nome:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
                 <TextView
                     android:id="@+id/textViewDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/gg_sans_regular"/>
+
+                <!-- DATA -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Data:"
                     android:textStyle="bold"
-                    android:textSize="22sp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/textViewDetailDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
+
+                <!-- CITTA -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Città:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/textViewDetailLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:fontFamily="@font/gg_sans_regular"/>
 
+                <!-- DESCRIZIONE -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Descrizione:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewDetailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/gg_sans_regular"/>
+
+                <!-- LINK ESTERNO -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Link Esterno:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewDetailLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/gg_sans_regular"/>
+
+                <!-- CONTATTI -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Contatti:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewDetailContacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="email"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/gg_sans_regular"/>
+
+                <!-- BOTTONE PREFERITI -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonSaveFavorite"
                     android:layout_width="wrap_content"
@@ -78,6 +162,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- BOTTONE BACK -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/back_button"
             android:layout_width="wrap_content"

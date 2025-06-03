@@ -34,6 +34,10 @@ class EventDetailsActivity : AppCompatActivity() {
         val textName = findViewById<TextView>(R.id.textViewDetailName)
         val textDate = findViewById<TextView>(R.id.textViewDetailDate)
         val textLocation = findViewById<TextView>(R.id.textViewDetailLocation)
+        val textDescription = findViewById<TextView>(R.id.textViewDetailDescription)
+        val textLink = findViewById<TextView>(R.id.textViewDetailLink)
+        val textContacts = findViewById<TextView>(R.id.textViewDetailContacts)
+
         buttonSave = findViewById(R.id.buttonSaveFavorite)
 
         val eventId = intent.getStringExtra("event_id") ?: return
@@ -43,9 +47,14 @@ class EventDetailsActivity : AppCompatActivity() {
             val event = list.find { it.id == eventId }
             if (event != null) {
                 currentEvent = event
+
+                // --- Popola UI ---
                 textName.text = event.name
                 textDate.text = event.date
                 textLocation.text = event.location
+                textDescription.text = event.description ?: "Nessuna descrizione disponibile"
+                textLink.text = event.externalLink ?: "Nessun link disponibile"
+                textContacts.text = event.contacts ?: "Nessun contatto disponibile"
 
                 Glide.with(this)
                     .load(event.imageUrl)
