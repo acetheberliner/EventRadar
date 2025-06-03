@@ -10,6 +10,7 @@
 - Auto zoom on searched city [DONE]
 - Reset search button height adj. [DONE]
 - Modern app icon [DONE]
+- Modern app icon v2 
 - Base case for no events still displaying all list [SOLVED]
 
 - Event details:
@@ -22,12 +23,11 @@
   
 - Add other events to DB <----------
 
-- (?) Filter events expired
-- (?) Page animations (fade-in/out)
-- (?) Next events from now on button
+- (?) Filter events expired [DONE]
+- (?) Next events from now on switch [DONE]
 
 - (!) Pass every string to string.xml/colors.xml/values.xml <----------
-- (!) UX/UI improvements <----------
+- (!) UX/UI improvements <---------- [DONE - 50%]
 
 - Clean project
 - Clean comments
