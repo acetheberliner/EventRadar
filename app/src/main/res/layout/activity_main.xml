@@ -53,7 +53,6 @@
         app:layout_constraintTop_toTopOf="@id/editDate"
         app:layout_constraintBottom_toBottomOf="@id/editDate"/>
 
-
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
@@ -105,12 +104,24 @@
             />
     </LinearLayout>
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchFutureOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Solo eventi futuri  "
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonsContainer" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/buttonsContainer"
+        app:layout_constraintTop_toBottomOf="@id/switchFutureOnly"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>

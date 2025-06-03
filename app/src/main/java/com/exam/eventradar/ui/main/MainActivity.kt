@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -95,15 +96,51 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val switchFutureOnly = findViewById<SwitchCompat>(R.id.switchFutureOnly)
+
+        fun isFutureEvent(dateStr: String): Boolean {
+            return try {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                val eventDate = sdf.parse(dateStr)
+                val now = java.util.Calendar.getInstance().time
+                eventDate != null && eventDate >= now
+            } catch (e: Exception) {
+                false
+            }
+        }
+
         // 2️⃣ osservo currentEvents → aggiorno la UI
         viewModel.currentEvents.observe(this) { events ->
+            val filteredEvents = if (switchFutureOnly.isChecked) {
+                events.filter { isFutureEvent(it.date) }
+            } else {
+                events
+            }
+
             if (firstLoadDone) {
-                if (events.isEmpty()) {
+                if (filteredEvents.isEmpty()) {
                     textNoEvents.visibility = View.VISIBLE
-                    adapter.submitList(emptyList())
                 } else {
                     textNoEvents.visibility = View.GONE
-                    adapter.submitList(events)
+                    adapter.submitList(filteredEvents)
+                }
+            }
+        }
+
+        switchFutureOnly.setOnCheckedChangeListener { _, _ ->
+            // Forzo refresh della lista visibile
+            viewModel.currentEvents.value?.let { events ->
+                val filteredEvents = if (switchFutureOnly.isChecked) {
+                    events.filter { isFutureEvent(it.date) }
+                } else {
+                    events
+                }
+
+                if (filteredEvents.isEmpty()) {
+                    textNoEvents.visibility = View.VISIBLE
+                } else {
+                    textNoEvents.visibility = View.GONE
+                    adapter.submitList(filteredEvents)
                 }
             }
         }
