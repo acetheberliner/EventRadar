@@ -11,6 +11,7 @@ import com.exam.eventradar.domain.models.Event
 import com.exam.eventradar.ui.adapters.EventAdapter
 import com.exam.eventradar.ui.main.MainViewModel
 import com.exam.eventradar.ui.main.MainViewModelFactory
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class FavoritesActivity : AppCompatActivity() {
 
@@ -19,6 +20,7 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private lateinit var adapter: EventAdapter
+    private var isOrderByDate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +31,50 @@ class FavoritesActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewModel.favoriteEvents.observe(this) { entityList ->
-            val eventList = entityList.map { entity ->
-                Event(
-                    id = entity.id,
-                    name = entity.name,
-                    date = entity.date,
-                    location = entity.location,
-                    imageUrl = entity.imageUrl
-                )
-            }
-            adapter.submitList(eventList)
+        val switchOrderByDate = findViewById<SwitchMaterial>(R.id.switchOrderByDate)
+
+        // Quando cambio lo switch, aggiorno la lista ordinata
+        switchOrderByDate.setOnCheckedChangeListener { _, isChecked ->
+            isOrderByDate = isChecked
+            // Ritrigger il LiveData per riordinare
+            updateFavoriteList(viewModel.favoriteEvents.value ?: emptyList())
         }
 
+        // Osserva i preferiti
+        viewModel.favoriteEvents.observe(this) { entityList ->
+            updateFavoriteList(entityList)
+        }
+
+        // Pulsante indietro
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.back_button)
             .setOnClickListener {
                 finish()
             }
+    }
+
+    private fun updateFavoriteList(entityList: List<com.exam.eventradar.data.local.entities.EventEntity>) {
+        // Conversione a domain model
+        val eventList = entityList.map { entity ->
+            Event(
+                id = entity.id,
+                name = entity.name,
+                date = entity.date,
+                location = entity.location,
+                imageUrl = entity.imageUrl,
+                description = entity.description,
+                externalLink = entity.externalLink,
+                contacts = entity.contacts
+            )
+        }
+
+        // Se lo switch è ON, ordina per data
+        val sortedList = if (isOrderByDate) {
+            eventList.sortedBy { it.date }
+        } else {
+            eventList
+        }
+
+        // Aggiorna la lista nella RecyclerView
+        adapter.submitList(sortedList)
     }
 }

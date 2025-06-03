@@ -21,6 +21,17 @@
             android:textColor="@color/black"
             android:paddingBottom="8dp" />
 
+        <!-- Switch per ordinamento -->
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchOrderByDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordina per data  "
+            android:textColor="@color/black"
+            android:paddingBottom="8dp"
+            android:checked="false" />
+
+        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavorites"
             android:layout_width="match_parent"
