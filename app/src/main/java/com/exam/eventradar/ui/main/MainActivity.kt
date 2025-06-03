@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Impedire apertura tastiera all'avvio
+        window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
         setContentView(R.layout.activity_main)
 
         progressBar = findViewById(R.id.progressBar)
@@ -96,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             if (firstLoadDone) {
                 if (events.isEmpty()) {
                     textNoEvents.visibility = View.VISIBLE
+                    adapter.submitList(emptyList())
                 } else {
                     textNoEvents.visibility = View.GONE
                     adapter.submitList(events)
@@ -118,7 +123,14 @@ class MainActivity : AppCompatActivity() {
 
         val buttonOpenMap = findViewById<Button>(R.id.buttonOpenMap)
         buttonOpenMap.setOnClickListener {
-            startActivity(Intent(this, MapActivity::class.java))
+            val city = findViewById<EditText>(R.id.editCity).text.toString().trim()
+
+            val intent = Intent(this, MapActivity::class.java)
+            if (city.isNotBlank()) {
+                intent.putExtra("searched_city", city)
+            }
+
+            startActivity(intent)
         }
 
         val buttonFavorites = findViewById<Button>(R.id.buttonFavorites)
