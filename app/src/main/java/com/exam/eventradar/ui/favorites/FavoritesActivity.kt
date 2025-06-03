@@ -12,6 +12,8 @@ import com.exam.eventradar.ui.adapters.EventAdapter
 import com.exam.eventradar.ui.main.MainViewModel
 import com.exam.eventradar.ui.main.MainViewModelFactory
 import com.google.android.material.switchmaterial.SwitchMaterial
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FavoritesActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class FavoritesActivity : AppCompatActivity() {
 
     private lateinit var adapter: EventAdapter
     private var isOrderByDate = false
+    private var isFutureOnly = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +35,17 @@ class FavoritesActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val switchOrderByDate = findViewById<SwitchMaterial>(R.id.switchOrderByDate)
+        val switchFutureOnly = findViewById<SwitchMaterial>(R.id.switchFutureOnlyFavorites)
 
-        // Quando cambio lo switch, aggiorno la lista ordinata
+        // Switch "Ordina per data"
         switchOrderByDate.setOnCheckedChangeListener { _, isChecked ->
             isOrderByDate = isChecked
-            // Ritrigger il LiveData per riordinare
+            updateFavoriteList(viewModel.favoriteEvents.value ?: emptyList())
+        }
+
+        // Switch "Mostra solo eventi futuri"
+        switchFutureOnly.setOnCheckedChangeListener { _, isChecked ->
+            isFutureOnly = isChecked
             updateFavoriteList(viewModel.favoriteEvents.value ?: emptyList())
         }
 
@@ -67,14 +76,32 @@ class FavoritesActivity : AppCompatActivity() {
             )
         }
 
-        // Se lo switch è ON, ordina per data
-        val sortedList = if (isOrderByDate) {
-            eventList.sortedBy { it.date }
+        // Filtro eventi futuri se richiesto
+        val filteredList = if (isFutureOnly) {
+            eventList.filter { isFutureEvent(it.date) }
         } else {
             eventList
         }
 
-        // Aggiorna la lista nella RecyclerView
-        adapter.submitList(sortedList)
+        // Ordina se richiesto
+        val finalList = if (isOrderByDate) {
+            filteredList.sortedBy { it.date }
+        } else {
+            filteredList
+        }
+
+        // Aggiorna la RecyclerView
+        adapter.submitList(finalList)
+    }
+
+    private fun isFutureEvent(dateStr: String): Boolean {
+        return try {
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val eventDate = sdf.parse(dateStr)
+            val now = Calendar.getInstance().time
+            eventDate != null && eventDate >= now
+        } catch (e: Exception) {
+            false
+        }
     }
 }

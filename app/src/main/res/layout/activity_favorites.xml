@@ -28,8 +28,18 @@
             android:layout_height="wrap_content"
             android:text="Ordina per data  "
             android:textColor="@color/black"
-            android:paddingBottom="8dp"
-            android:checked="false" />
+            android:checked="false"
+            android:layout_gravity="right"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchFutureOnlyFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mostra solo eventi futuri  "
+            android:textColor="@color/black"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="right"/>
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
