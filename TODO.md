@@ -10,7 +10,7 @@
 - Auto zoom on searched city [DONE]
 - Reset search button height adj. [DONE]
 - Modern app icon [DONE]
-- Modern app icon v2 
+- Modern app icon v2 [DONE]
 - Base case for no events still displaying all list [SOLVED]
 
 - Event details:
@@ -25,6 +25,7 @@
 
 - (?) Filter events expired [DONE]
 - (?) Next events from now on switch [DONE]
+- (?) Progressbar for map loading
 
 - (!) Pass every string to string.xml/colors.xml/values.xml <----------
 - (!) UX/UI improvements <---------- [DONE - 50%]
