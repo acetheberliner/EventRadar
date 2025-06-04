@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.exam.eventradar.EventRadarApp
 import com.exam.eventradar.R
 import com.exam.eventradar.domain.models.Event
+import com.exam.eventradar.ui.adapters.CustomInfoWindowAdapter
 import com.exam.eventradar.ui.main.MainViewModel
 import com.exam.eventradar.ui.main.MainViewModelFactory
 import com.exam.eventradar.utils.GeocodingUtils
@@ -71,6 +72,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
         isMapReady = true
 
+        // Setta custom adapter!
+        map.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
+
         if (!searchedCity.isNullOrBlank()) {
             lifecycleScope.launch {
                 val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, searchedCity!!)
@@ -101,18 +105,26 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         map.clear()
 
-        events.forEach { event ->
+        // Group by city!
+        val eventsByCity = events.groupBy { it.location.trim() }
+
+        eventsByCity.forEach { (city, cityEvents) ->
             lifecycleScope.launch {
-                val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, event.location)
+                val latLng = GeocodingUtils.getLocationFromAddress(this@MapActivity, city)
                 latLng?.let {
-                    val isFavorite = favoriteIds.contains(event.id)
-                    val title = if (isFavorite) "${event.name} (Preferito)" else event.name
+                    val isFavorite = cityEvents.any { e -> favoriteIds.contains(e.id) }
+                    val title = "$city - ${cityEvents.size} evento${if (cityEvents.size > 1) "/i" else ""}"
+
+                    // Build multiline snippet
+                    val snippet = cityEvents.joinToString(separator = "\n") { e ->
+                        "• ${e.name} (${e.date})"
+                    }
 
                     map.addMarker(
                         MarkerOptions()
                             .position(it)
                             .title(title)
-                            .snippet(event.date)
+                            .snippet(snippet)
                             .icon(
                                 if (isFavorite)
                                     BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
@@ -149,7 +161,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            // 👉 SOLO se non sto già mostrando una searchedCity faccio lo zoom su user
             if (searchedCity.isNullOrBlank()) {
                 if (location != null && location.latitude != 37.422 && location.longitude != -122.084) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
