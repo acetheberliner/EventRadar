@@ -21,15 +21,17 @@
   - External Link [ADDED]
   - Contacts [ADDED]
   
-- Add other events to DB <----------
-
+- Add other events to DB [DONE]
 - (?) Filter events expired [DONE]
 - (?) Next events from now on switch [DONE]
 - (?) Progressbar for map loading [DONE]
 
-- (!) Pass every string to string.xml/colors.xml/values.xml <----------
-- (!) UX/UI improvements <---------- [DONE - 50%]
-- (!) Map markers only displaying one event even if more are in the same city <---------- [DONE]
+- (!) Pass every string to string.xml
+- (!) Pass every color to colors.xml [DONE]
+- (!) Pass every value to values.xml
+
+- (!) UX/UI improvements [DONE]
+- (!) Map markers only displaying one event even if more are in the same city [DONE]
 
 - Clean comments [DONE]
 - Clean project [DONE]
