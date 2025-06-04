@@ -25,10 +25,10 @@
 
 - (?) Filter events expired [DONE]
 - (?) Next events from now on switch [DONE]
-- (?) Progressbar for map loading
+- (?) Progressbar for map loading [DONE]
 
 - (!) Pass every string to string.xml/colors.xml/values.xml <----------
 - (!) UX/UI improvements <---------- [DONE - 50%]
 
-- Clean project
 - Clean comments
+- Clean project

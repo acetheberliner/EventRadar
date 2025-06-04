@@ -160,14 +160,16 @@ class MainActivity : AppCompatActivity() {
 
         val buttonOpenMap = findViewById<Button>(R.id.buttonOpenMap)
         buttonOpenMap.setOnClickListener {
-            val city = findViewById<EditText>(R.id.editCity).text.toString().trim()
+            val loadingDialog = com.exam.eventradar.ui.common.LoadingDialogFragment()
+            loadingDialog.show(supportFragmentManager, "loading_map")
 
             val intent = Intent(this, MapActivity::class.java)
-            if (city.isNotBlank()) {
-                intent.putExtra("searched_city", city)
-            }
-
             startActivity(intent)
+
+            // Dopo piccolo delay per permettere alla dialog di comparire
+            buttonOpenMap.postDelayed({
+                loadingDialog.dismiss()
+            }, 2000) // 400ms
         }
 
         val buttonFavorites = findViewById<Button>(R.id.buttonFavorites)
