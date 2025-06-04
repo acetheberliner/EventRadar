@@ -59,7 +59,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 finish()
             }
 
-        // 👇 Osserva i preferiti
+        // Recupera i preferiti per i marker
         viewModel.favoriteEvents.observe(this) { favorites ->
             favoriteIds = favorites.map { it.id }.toSet()
             if (isMapReady) {
@@ -72,7 +72,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
         isMapReady = true
 
-        // Setta custom adapter!
+        // Custom adapter per gli snippet dei marker
         map.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
 
         if (!searchedCity.isNullOrBlank()) {
@@ -92,7 +92,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         checkLocationPermissionAndEnable()
 
-        // 👇 Osserva gli eventi
+        // Recupera gli eventi
         viewModel.events.observe(this) { allEvents ->
             if (isMapReady) {
                 updateMarkers(allEvents)
@@ -101,11 +101,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun updateMarkers(events: List<Event> = viewModel.events.value ?: emptyList()) {
-        if (!isMapReady) return // Safety net
+        if (!isMapReady) return
 
         map.clear()
 
-        // Group by city!
+        // Raggruppa gli eventi in base alla città
         val eventsByCity = events.groupBy { it.location.trim() }
 
         eventsByCity.forEach { (city, cityEvents) ->
@@ -115,7 +115,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     val isFavorite = cityEvents.any { e -> favoriteIds.contains(e.id) }
                     val title = "$city - ${cityEvents.size} evento${if (cityEvents.size > 1) "/i" else ""}"
 
-                    // Build multiline snippet
+                    // Build dello snippet multilinea per i marker
                     val snippet = cityEvents.joinToString(separator = "\n") { e ->
                         "• ${e.name} (${e.date})"
                     }

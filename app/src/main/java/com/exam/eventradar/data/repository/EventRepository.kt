@@ -28,7 +28,6 @@ class EventRepository(
     }
 
     suspend fun refreshEventsFromCityAndDate(city: String, date: String) {
-        Log.d("API_DEBUG", "Cerco eventi per $city - $date")
         try {
             val response = apiService.getEvents(city, date)
             val existing = eventDao.getAllEventsSync().associateBy { it.id }
@@ -48,12 +47,10 @@ class EventRepository(
                 )
             }
 
-            // ✅ Inserisce senza cancellare (replace mantiene preferiti)
             eventDao.insertEvents(entities)
 
             Log.d("API", "Eventi ricevuti: ${entities.size}")
         } catch (e: Exception) {
-            Log.e("API_DEBUG", "Errore durante la chiamata Retrofit", e)
             Log.e("API", "Errore rete: ${e.localizedMessage}")
         }
     }
@@ -74,7 +71,7 @@ class EventRepository(
                     description = event.description,
                     externalLink = event.externalLink,
                     contacts = event.contacts,
-                    isFavorite = old?.isFavorite ?: false // ✅ anche qui preserva
+                    isFavorite = old?.isFavorite ?: false
                 )
             }
 
@@ -96,7 +93,6 @@ class EventRepository(
         try {
             val response = apiService.getEventsByCity(city)
 
-            // Rimuovi TUTTI gli eventi della città corrente PRIMA di inserire
             eventDao.deleteEventsByCity(city)
 
             val existing = eventDao.getAllEventsSync().associateBy { it.id }
@@ -119,7 +115,6 @@ class EventRepository(
             eventDao.insertEvents(entities)
 
             Log.d("API", "Fallback eventi città $city: ${entities.size}")
-
         } catch (e: Exception) {
             Log.e("API", "Errore fallback eventi città: ${e.localizedMessage}")
         }
@@ -156,6 +151,4 @@ class EventRepository(
             )
         }
     }
-
-
 }

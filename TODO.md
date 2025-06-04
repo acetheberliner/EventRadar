@@ -29,7 +29,7 @@
 
 - (!) Pass every string to string.xml/colors.xml/values.xml <----------
 - (!) UX/UI improvements <---------- [DONE - 50%]
-- (!) Map markers only displaying one event even if more are in the same city <----------
+- (!) Map markers only displaying one event even if more are in the same city <---------- [DONE]
 
-- Clean comments
-- Clean project
+- Clean comments [DONE]
+- Clean project [DONE]

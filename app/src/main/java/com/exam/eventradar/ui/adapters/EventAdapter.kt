@@ -23,7 +23,6 @@ class EventAdapter(private var events: List<Event>) :
         private val textViewDate: TextView = itemView.findViewById(R.id.textViewDate)
         private val textViewLocation: TextView = itemView.findViewById(R.id.textViewLocation)
         private val textExpired: TextView = itemView.findViewById(R.id.textExpired)
-        private val textDetailsHint: TextView = itemView.findViewById(R.id.textDetailsHint)
 
         fun bind(event: Event) {
             textViewName.text = event.name
@@ -36,7 +35,7 @@ class EventAdapter(private var events: List<Event>) :
                 .placeholder(R.drawable.placeholder_image)
                 .into(imageViewEvent)
 
-            // Controllo se evento è passato
+            // Controllo se un evento è già avvenuto (passato)
             val eventDate = try {
                 LocalDate.parse(event.date, DateTimeFormatter.ISO_LOCAL_DATE)
             } catch (e: Exception) {
@@ -51,7 +50,7 @@ class EventAdapter(private var events: List<Event>) :
                 textExpired.visibility = View.GONE
             }
 
-            // Click → Dettagli evento
+            // Il click sulla card conduce ai dettagli dell'evento corrispondente
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, EventDetailsActivity::class.java).apply {
                     putExtra("event_id", event.id)

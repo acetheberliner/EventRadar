@@ -4,11 +4,8 @@ import android.app.Application
 import com.exam.eventradar.data.local.db.AppDatabase
 import com.exam.eventradar.data.remote.api.EventApiService
 import com.exam.eventradar.data.repository.EventRepository
-import okhttp3.OkHttpClient
-//import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 class EventRadarApp : Application() {
 

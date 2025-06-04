@@ -9,8 +9,10 @@ import com.exam.eventradar.R
 class LoadingDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
+
         builder.setView(R.layout.dialog_loading)
         isCancelable = false
+
         return builder.create()
     }
 }

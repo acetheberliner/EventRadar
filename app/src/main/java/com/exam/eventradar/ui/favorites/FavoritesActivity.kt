@@ -37,24 +37,24 @@ class FavoritesActivity : AppCompatActivity() {
         val switchOrderByDate = findViewById<SwitchMaterial>(R.id.switchOrderByDate)
         val switchFutureOnly = findViewById<SwitchMaterial>(R.id.switchFutureOnlyFavorites)
 
-        // Switch "Ordina per data"
+        // Ordina per data
         switchOrderByDate.setOnCheckedChangeListener { _, isChecked ->
             isOrderByDate = isChecked
             updateFavoriteList(viewModel.favoriteEvents.value ?: emptyList())
         }
 
-        // Switch "Mostra solo eventi futuri"
+        // Nascondi eventi passati
         switchFutureOnly.setOnCheckedChangeListener { _, isChecked ->
             isFutureOnly = isChecked
             updateFavoriteList(viewModel.favoriteEvents.value ?: emptyList())
         }
 
-        // Osserva i preferiti
+        // Legge i preferiti
         viewModel.favoriteEvents.observe(this) { entityList ->
             updateFavoriteList(entityList)
         }
 
-        // Pulsante indietro
+        // Pulsante indietro floating
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.back_button)
             .setOnClickListener {
                 finish()
@@ -62,7 +62,6 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private fun updateFavoriteList(entityList: List<com.exam.eventradar.data.local.entities.EventEntity>) {
-        // Conversione a domain model
         val eventList = entityList.map { entity ->
             Event(
                 id = entity.id,
@@ -76,21 +75,20 @@ class FavoritesActivity : AppCompatActivity() {
             )
         }
 
-        // Filtro eventi futuri se richiesto
+        // Nascondi eventi passati
         val filteredList = if (isFutureOnly) {
             eventList.filter { isFutureEvent(it.date) }
         } else {
             eventList
         }
 
-        // Ordina se richiesto
+        // Ordina per data
         val finalList = if (isOrderByDate) {
             filteredList.sortedBy { it.date }
         } else {
             filteredList
         }
 
-        // Aggiorna la RecyclerView
         adapter.submitList(finalList)
     }
 

@@ -42,13 +42,11 @@ class EventDetailsActivity : AppCompatActivity() {
 
         val eventId = intent.getStringExtra("event_id") ?: return
 
-        // ✅ Usa sempre viewModel.events
         viewModel.events.observe(this) { list ->
             val event = list.find { it.id == eventId }
             if (event != null) {
                 currentEvent = event
 
-                // --- Popola UI ---
                 textName.text = event.name
                 textDate.text = event.date
                 textLocation.text = event.location

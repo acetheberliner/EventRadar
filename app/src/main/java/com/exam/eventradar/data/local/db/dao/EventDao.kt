@@ -15,9 +15,6 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEvents(events: List<EventEntity>)
 
-    @Query("DELETE FROM events")
-    suspend fun clearAllEvents()
-
     @Query("SELECT * FROM events WHERE isFavorite = 1")
     fun getFavoriteEvents(): LiveData<List<EventEntity>>
 

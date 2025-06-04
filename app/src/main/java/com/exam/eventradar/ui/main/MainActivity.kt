@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Impedire apertura tastiera all'avvio
+        // Impedisce apertura tastiera all'avvio
         window.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         setContentView(R.layout.activity_main)
@@ -79,18 +79,17 @@ class MainActivity : AppCompatActivity() {
             viewModel.refreshEventsOrFallback(city, date)
         }
 
-        // --- osserva progress
+        // Gestisce la progressbar per il caricamento delle card degli eventi
         viewModel.progress.observe(this) { isLoading ->
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        // --- variabile di stato per evitare falso "nessun evento trovato"
+        // Variabile di stato per evitare situazioni di falso "nessun evento trovato"
         var firstLoadDone = false
 
-        // 1️⃣ osservo direttamente repository.events
         viewModel.events.observe(this) { events ->
             if (!firstLoadDone) {
-                // Prima volta → sincronizzo currentEvents
+                // Al primo caricamento sincronizzo currentEvents con gli eventi del db
                 viewModel.setCurrentEvents(events)
                 firstLoadDone = true
             }
@@ -109,7 +108,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 2️⃣ osservo currentEvents → aggiorno la UI
         viewModel.currentEvents.observe(this) { events ->
             val filteredEvents = if (switchFutureOnly.isChecked) {
                 events.filter { isFutureEvent(it.date) }
@@ -145,16 +143,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // --- fallback message opzionale
+        // Fallback message in caso di nessun evento per la città indicata
         viewModel.fallbackMessage.observe(this) { message ->
             if (message.isNotBlank()) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
         }
 
-        // --- carica tutti gli eventi
+        // Carica tutti gli eventi
         viewModel.loadAllEvents {
-            // quando ha finito il primo caricamento, ora posso mostrare correttamente
             firstLoadDone = true
         }
 
@@ -166,10 +163,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
 
-            // Dopo piccolo delay per permettere alla dialog di comparire
+            // Delay per permettere alla dialog della mappa di comparire prima di cambiare view
             buttonOpenMap.postDelayed({
                 loadingDialog.dismiss()
-            }, 2000) // 400ms
+            }, 2000)
         }
 
         val buttonFavorites = findViewById<Button>(R.id.buttonFavorites)
@@ -181,7 +178,7 @@ class MainActivity : AppCompatActivity() {
         val buttonReset = findViewById<Button>(R.id.buttonReset)
 
         editDate.setOnClickListener {
-            // Apri il DatePicker
+            // Apre il DatePicker
             val calendar = java.util.Calendar.getInstance()
             val datePicker = android.app.DatePickerDialog(
                 this,

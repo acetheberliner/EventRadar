@@ -15,21 +15,21 @@ class MainViewModel(private val repository: EventRepository) : ViewModel() {
 
     val events = repository.events
 
-    // 🔹 Eventi correnti mostrati nella MainActivity
+    // Eventi correnti mostrati nella MainActivity
     private val _currentEvents = MutableLiveData<List<Event>>()
     val currentEvents: LiveData<List<Event>> = _currentEvents
 
-    // 🔹 Preferiti
+    // Preferiti
     val favoriteEvents: LiveData<List<EventEntity>> = repository.favoriteEvents
 
-    // 🔹 Progress
+    // ProgressBar
     val progress = MutableLiveData<Boolean>()
 
-    // 🔹 Messaggio di fallback
+    // Messaggio di fallback
     private val _fallbackMessage = MutableLiveData<String>()
     val fallbackMessage: LiveData<String> = _fallbackMessage
 
-    // 🔹 Carica TUTTI gli eventi (HOME)
+    // Carica tutti gli eventi (HOME PAGE BASE)
     fun loadAllEvents(onComplete: () -> Unit = {}) {
         viewModelScope.launch {
             progress.postValue(true)
@@ -41,12 +41,11 @@ class MainViewModel(private val repository: EventRepository) : ViewModel() {
             _currentEvents.postValue(repository.events.value ?: emptyList())
             progress.postValue(false)
 
-            // Notifica che ha finito
             onComplete()
         }
     }
 
-    // 🔹 Ricerca con fallback
+    // Ricerca con fallback
     fun refreshEventsOrFallback(city: String, date: String) {
         viewModelScope.launch {
             progress.postValue(true)
@@ -73,18 +72,10 @@ class MainViewModel(private val repository: EventRepository) : ViewModel() {
         }
     }
 
-    // 🔹 Set preferito
+    // Set stato preferito ad evento
     fun setFavoriteStatus(eventId: String, isFavorite: Boolean) {
         viewModelScope.launch {
             repository.setFavoriteStatus(eventId, isFavorite)
-        }
-    }
-
-    // 🔹 Metodo base se vuoi ancora chiamare refresh semplice (opzionale)
-    fun refreshEvents(city: String, date: String) {
-        viewModelScope.launch {
-            repository.refreshEventsFromCityAndDate(city, date)
-            _currentEvents.postValue(repository.events.value ?: emptyList())
         }
     }
 

@@ -8,12 +8,11 @@ import com.exam.eventradar.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
-class CustomInfoWindowAdapter(private val context: Context) : GoogleMap.InfoWindowAdapter {
+class CustomInfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
     private val window: View = LayoutInflater.from(context).inflate(R.layout.map_info_window, null)
 
     override fun getInfoWindow(marker: Marker): View? {
-        // Se vuoi finestra standard + custom snippet → restituisci null qui
         return null
     }
 
@@ -21,7 +20,7 @@ class CustomInfoWindowAdapter(private val context: Context) : GoogleMap.InfoWind
         val titleView = window.findViewById<TextView>(R.id.title)
         val detailsView = window.findViewById<TextView>(R.id.details)
 
-        // Prende title e snippet dal marker
+        // Recupero title e snippet dal marker sulla mappa
         titleView.text = marker.title
         detailsView.text = marker.snippet ?: ""
 
