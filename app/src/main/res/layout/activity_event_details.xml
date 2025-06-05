@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp">
+    android:padding="@dimen/detail_padding">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,21 +15,21 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
+            android:layout_marginBottom="@dimen/cardview_mb"
+            app:cardCornerRadius="@dimen/cardview_corner_radius"
+            app:cardElevation="@dimen/cardview_elevation"
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/detail_padding">
 
                 <ImageView
                     android:id="@+id/imageViewDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/cardview_image_height"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/event_image"
                     android:background="@drawable/placeholder_image" />
@@ -38,91 +38,91 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Nome:"
+                    android:layout_marginTop="@dimen/cardview_mt"
+                    android:text="@string/event_name"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/textview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- DATA -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Data:"
+                    android:layout_marginTop="@dimen/textview_mt"
+                    android:text="@string/event_date"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/cardview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- CITTA -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Città:"
+                    android:layout_marginTop="@dimen/textview_mt"
+                    android:text="@string/event_city"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/cardview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- DESCRIZIONE -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Descrizione:"
+                    android:layout_marginTop="@dimen/textview_mt"
+                    android:text="@string/event_description"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/cardview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- LINK ESTERNO -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Link Esterno:"
+                    android:layout_marginTop="@dimen/textview_mt"
+                    android:text="@string/event_link"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailLink"
@@ -130,20 +130,20 @@
                     android:layout_height="wrap_content"
                     android:autoLink="web"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/link"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/cardview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- CONTATTI -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Contatti:"
+                    android:layout_marginTop="@dimen/textview_mt"
+                    android:text="@string/event_contacts"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/cardview_text_size"/>
 
                 <TextView
                     android:id="@+id/textViewDetailContacts"
@@ -151,9 +151,9 @@
                     android:layout_height="wrap_content"
                     android:autoLink="email"
                     android:background="@drawable/edittext_background"
-                    android:padding="6dp"
+                    android:padding="@dimen/textview_padding"
                     android:textColor="@color/link"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/cardview_text_size"
                     android:fontFamily="@font/gg_sans_regular"/>
 
                 <!-- BOTTONE PREFERITI -->
@@ -162,14 +162,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/favourite_button_mt"
                     android:text="@string/save_favorite"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:cornerRadius="8dp"
+                    app:cornerRadius="@dimen/button_corner_radius"
                     app:iconTint="@color/white"
-                    app:iconPadding="8dp"
-                    app:backgroundTint="#03A9F4"
+                    app:iconPadding="@dimen/icon_padding"
+                    app:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/gg_sans_regular"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -180,11 +180,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/textview_mt"
             android:contentDescription="@string/back_btn"
             android:src="@drawable/back_icon"
             android:tint="@color/white"
-            app:backgroundTint="#03A9F4" />
+            app:backgroundTint="@color/colorPrimary" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

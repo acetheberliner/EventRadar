@@ -1,0 +1,58 @@
+<resources>
+    <dimen name="detail_padding">16dp</dimen>
+    <dimen name="favorite_title_pb">8dp</dimen>
+    <dimen name="constraint_padding">16dp</dimen>
+    <dimen name="linear_layout_padding">16dp</dimen>
+    <dimen name="textview_padding">6dp</dimen>
+    <dimen name="editext_padding">6dp</dimen>
+    <dimen name="icon_padding">8dp</dimen>
+    <dimen name="recycler_padding">8dp</dimen>
+    <dimen name="snippet_padding">8dp</dimen>
+    <dimen name="progressbar_padding">24dp</dimen>
+    <dimen name="event_card_padding">12dp</dimen>
+
+    <dimen name="cardview_mb">16dp</dimen>
+    <dimen name="cardview_mt">12dp</dimen>
+    <dimen name="textview_mt">8dp</dimen>
+    <dimen name="layout_mt">8dp</dimen>
+    <dimen name="snippet_mb">4dp</dimen>
+    <dimen name="detail_subtitle_mt">8dp</dimen>
+    <dimen name="detail_textview_mt">10dp</dimen>
+    <dimen name="favourite_button_mt">16dp</dimen>
+    <dimen name="switch_mt">2dp</dimen>
+
+    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_margin_end">4dp</dimen>
+    <dimen name="layout_margin_horizontal">4dp</dimen>
+    <dimen name="layout_margin_start">8dp</dimen>
+
+    <dimen name="cardview_text_size">16sp</dimen>
+    <dimen name="snippet_text_size">15sp</dimen>
+    <dimen name="detail_subtitle_text_size">14sp</dimen>
+    <dimen name="detail_view_detail">13sp</dimen>
+    <dimen name="snippet_subtitle">13sp</dimen>
+    <dimen name="textview_text_size">18sp</dimen>
+    <dimen name="favorite_title_size">20sp</dimen>
+
+    <dimen name="cardview_corner_radius">12dp</dimen>
+    <dimen name="button_corner_radius">8dp</dimen>
+    <dimen name="cardview_elevation">6dp</dimen>
+    <dimen name="cardview_image_height">200dp</dimen>
+
+    <dimen name="switch_height">14dp</dimen>
+    <dimen name="button_height">46dp</dimen>
+    <dimen name="button_box_height">42dp</dimen>
+    <dimen name="layout_height">25dp</dimen>
+    <dimen name="recycler_height">0dp</dimen>
+    <dimen name="progressbar_height">80dp</dimen>
+    <dimen name="detail_image_height">180dp</dimen>
+
+    <dimen name="favorite_weight">1</dimen>
+    <dimen name="layout_weight">1</dimen>
+
+    <dimen name="layout_width">0dp</dimen>
+    <dimen name="progressbar_width">80dp</dimen>
+
+    <dimen name="form_radius">8dp</dimen>
+    <dimen name="form_stroke_size">1dp</dimen>
+</resources>

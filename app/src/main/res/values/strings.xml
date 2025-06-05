@@ -1,7 +1,38 @@
 <resources>
     <string name="app_name">Event Radar</string>
+
     <string name="save_favorite">Aggiungi ai Preferiti</string>
-    <string name="event_image">Copertina evento</string>
     <string name="back_btn">Torna alla home\n</string>
+
     <string name="map_preview">Preview della mappa</string>
+
+    <string name="event_image">Copertina evento</string>
+    <string name="event_name">Nome:</string>
+    <string name="event_date">Data:</string>
+    <string name="event_city">Città:</string>
+    <string name="event_description">Descrizione:</string>
+    <string name="event_link">Link esterno:</string>
+    <string name="event_contacts">Contatti:</string>
+
+    <string name="favorite_title">Eventi Preferiti</string>
+
+    <string name="switch_date">Ordina per data  </string>
+    <string name="switch_future">Solo eventi futuri  </string>
+
+    <string name="city_placeholder">Inserisci città</string>
+    <string name="date_placeholder">Inserisci data</string>
+
+    <string name="button_delete">Cancella</string>
+    <string name="button_search">Cerca</string>
+    <string name="button_map">Mappa</string>
+    <string name="button_favorite">Preferiti</string>
+
+    <string name="cards_default">Nessun evento trovato</string>
+    <string name="empty"> </string>
+
+    <string name="detail_event_title">Titolo evento</string>
+    <string name="detail_event_date">Data</string>
+    <string name="detail_event_city">Luogo</string>
+    <string name="detail_event_view_details">Tocca per visualizzare i dettagli</string>
+    <string name="event_expired">EVENTO PASSATO</string>
 </resources>

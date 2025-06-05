@@ -28,7 +28,7 @@
 
 - (!) Pass every string to string.xml
 - (!) Pass every color to colors.xml [DONE]
-- (!) Pass every value to values.xml
+- (!) Pass every value to dimens.xml
 
 - (!) UX/UI improvements [DONE]
 - (!) Map markers only displaying one event even if more are in the same city [DONE]

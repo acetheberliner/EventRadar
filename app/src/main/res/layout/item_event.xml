@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="6dp"
+    android:layout_margin="@dimen/layout_mt"
+    app:cardCornerRadius="@dimen/cardview_corner_radius"
+    app:cardElevation="@dimen/cardview_elevation"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@android:color/white"
-        android:padding="12dp">
+        android:padding="@dimen/event_card_padding">
 
         <!-- Immagine dell'evento -->
         <ImageView
             android:id="@+id/imageViewEvent"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="@dimen/detail_image_height"
             android:scaleType="centerCrop"
             android:contentDescription="@string/event_image"
             android:background="@drawable/rounded_corners_gray"/>
@@ -31,55 +31,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/textview_text_size"
             android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:text="Titolo evento" />
+            android:layout_marginTop="@dimen/detail_textview_mt"
+            android:text="@string/detail_event_title" />
 
         <!-- Data -->
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data"
-            android:textSize="14sp"
+            android:text="@string/detail_event_date"
+            android:textSize="@dimen/detail_subtitle_text_size"
             android:textColor="@color/gray_dark"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="@dimen/detail_subtitle_mt" />
 
         <!-- Luogo -->
         <TextView
             android:id="@+id/textViewLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Luogo"
-            android:textSize="14sp"
+            android:text="@string/detail_event_city"
+            android:textSize="@dimen/detail_subtitle_text_size"
             android:textColor="@color/gray_dark"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="@dimen/switch_mt" />
 
         <!-- HINT PER DETTAGLI -->
         <TextView
             android:id="@+id/textDetailsHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tocca per visualizzare i dettagli"
+            android:text="@string/detail_event_view_details"
             android:textColor="@android:color/darker_gray"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:textSize="13sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"/>
+            android:textSize="@dimen/detail_view_detail"
+            android:layout_marginTop="@dimen/layout_mt"
+            android:layout_marginBottom="@dimen/layout_margin_end"/>
 
         <!-- EVENTO PASSATO -->
         <TextView
             android:id="@+id/textExpired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EVENTO PASSATO"
+            android:text="@string/event_expired"
             android:textColor="@android:color/holo_red_dark"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textStyle="bold"
             android:visibility="gone"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="@dimen/layout_margin_end"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
