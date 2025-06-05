@@ -26,12 +26,14 @@
 - (?) Next events from now on switch [DONE]
 - (?) Progressbar for map loading [DONE]
 
-- (!) Pass every string to string.xml
+- (!) Pass every string to string.xml [DONE]
 - (!) Pass every color to colors.xml [DONE]
-- (!) Pass every value to dimens.xml
+- (!) Pass every value to dimens.xml [DONE]
 
 - (!) UX/UI improvements [DONE]
 - (!) Map markers only displaying one event even if more are in the same city [DONE]
 
 - Clean comments [DONE]
 - Clean project [DONE]
+
+- (!) Auto zoom on searched city AGAIN <----
