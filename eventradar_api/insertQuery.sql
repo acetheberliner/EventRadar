@@ -1,0 +1,91 @@
+INSERT INTO events VALUES
+
+('6', 'Summer Tech Expo', '2025-08-15', 'Torino',
+ 'https://www.technologyrecord.com/Portals/0/EasyDNNNews/4826/images/SRTE2024_web-976-549-p-L-90.webp', 
+ 'Fiera annuale delle nuove tecnologie e startup.', 
+ 'https://www.summertechexpo.it', 
+ 'info@summertechexpo.it'),
+
+('7', 'Maratona di Firenze', '2025-11-03', 'Firenze',
+ 'https://www.firenzemarathon.it/wp-content/uploads/2025/02/SITO-BOX-LATERALI.png', 
+ 'Evento sportivo con partecipanti da tutto il mondo.', 
+ 'https://www.firenzemarathon.it', 
+ 'iscrizioni@firenzemarathon.it'),
+
+('8', 'Festival Internazionale del Cinema', '2026-03-21', 'Venezia',
+ 'https://www.romacinemafest.it/wp-content/uploads/2024/10/NEWS-INCONTRI_dammicco-1024x614.jpg', 
+ 'Rassegna cinematografica con anteprime internazionali.', 
+ 'https://www.cinemaveneziafestival.it', 
+ 'info@cinemaveneziafestival.it'),
+
+('9', 'Conferenza AI e Machine Learning', '2025-09-10', 'Milano',
+ 'https://cdn-magazine.startupitalia.eu/wp-content/uploads/2025/05/21102329/Screenshot-2025-05-21-102315.jpg', 
+ 'Evento per professionisti e appassionati di AI.', 
+ 'https://www.aiconfmilano.it', 
+ 'contatti@aiconfmilano.it'),
+
+('10', 'Festa della Birra Artigianale', '2025-10-05', 'Verona',
+ 'https://staticfanpage.akamaized.net/travelfanpage/wp-content/uploads/2014/09/feste-birra-italia.jpg', 
+ 'Degustazioni di birre artigianali da tutta Europa.', 
+ 'https://www.birrafestverona.it', 
+ 'info@birrafestverona.it'),
+
+('11', 'Salone Nautico', '2026-04-12', 'Genova',
+ 'https://motori.ilgazzettino.it/photos/HIGH/58/89/8375889_25151514_foto_panoramica_salone_nautico_genova_2024.jpg', 
+ 'Esposizione internazionale di imbarcazioni e accessori nautici.', 
+ 'https://www.salonenauticogenova.it', 
+ 'contatti@salonenauticogenova.it'),
+
+('12', 'Comic Convention', '2025-12-02', 'Lucca',
+ 'https://images.squarespace-cdn.com/content/v1/61ef2be885bb3a5b13d1e949/9930feb1-0010-4c89-a859-575b6a150b5f/comic-con-crowd.jpeg', 
+ 'Fiera del fumetto, cosplay e cultura pop.', 
+ 'https://www.luccacomicsandgames.it', 
+ 'info@luccacomicsandgames.it'),
+
+('13', 'Festival della Scienza', '2025-06-22', 'Trieste',
+ 'https://portoantico.it/wp-content/uploads/2014/10/ese-genova-festival-della-scienza_mini.jpg', 
+ 'Eventi e laboratori per divulgare la scienza.', 
+ 'https://www.festivalscienzatrieste.it', 
+ 'info@festivalscienzatrieste.it'),
+
+('14', 'Street Food Festival', '2025-07-10', 'Bari',
+ 'https://barlettalive.it/wp-content/uploads/sites/11/2024/07/international-street-food-festival.png', 
+ 'Cibo di strada da tutto il mondo.', 
+ 'https://www.streetfoodfestivalbari.it', 
+ 'info@streetfoodfestivalbari.it'),
+
+('15', 'Festival Jazz Lago di Garda', '2025-09-05', 'Riva del Garda',
+ 'https://www.gardatrentino.it/pppage_assets/MAIN_Garda_Jazz_Festival/2025/IMMAGINI_2024/image-thumb__41918__ds-gallery/Events_Garda_Jazz_Festival_16.webp', 
+ 'Rassegna di concerti jazz sul Lago di Garda.', 
+ 'https://www.jazzlagodigarda.it', 
+ 'info@jazzlagodigarda.it'),
+
+('16', 'Fiera dell` Artigianato', '2025-10-20', 'Perugia',
+ 'https://media-assets.lacucinaitaliana.it/photos/620b624fb758df3090bd3a02/3:2/w_1254,h_836,c_limit/fiera-dell-artigianato-milano.jpg', 
+ 'Mostra-mercato di prodotti artigianali.', 
+ 'https://www.fieraartigianatoperugia.it', 
+ 'info@fieraartigianatoperugia.it'),
+
+('17', 'Corso di Cucina Italiana', '2025-11-15', 'Parma',
+ 'https://www.tuchef.academy/images/generiche/cooking-class-turisti-tu-chef.jpg', 
+ 'Lezioni pratiche di cucina tradizionale italiana.', 
+ 'https://www.corsodicucinaitaliana.it', 
+ 'info@corsodicucinaitaliana.it'),
+
+('18', 'Motor Show', '2026-02-08', 'Bologna',
+ 'https://www.corriere.it/methode_image/2024/11/04/Motori/Foto%20Motori%20-%20Trattate/eicma2024-k2FD-U34901162542768RvG-990x558@Corriere-Web-Sezioni.JPG', 
+ 'Esposizione di auto e moto sportive.', 
+ 'https://www.motorshowbologna.it', 
+ 'info@motorshowbologna.it'),
+
+('19', 'Festival delle Luci', '2025-12-20', 'Torino',
+ 'https://img-prod.ilfoglio.it/2020/09/04/203949402-7173677d-dafb-492a-b630-5a8742083d22.jpg', 
+ 'Installazioni luminose in tutta la città.', 
+ 'https://www.festivallucitorino.it', 
+ 'info@festivallucitorino.it'),
+
+('20', 'Mostra Fotografica', '2026-01-15', 'Roma',
+ 'https://www.italpress.com/wp-content/uploads/2024/03/20240313_1086.jpg', 
+ 'Mostra internazionale di fotografia contemporanea.', 
+ 'https://www.mostrafotograficaroma.it', 
+ 'info@mostrafotograficaroma.it');
