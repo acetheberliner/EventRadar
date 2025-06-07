@@ -50,7 +50,7 @@ in base a una località e a una data specifica inserita. L’app consente di vis
 
 - Avviare XAMPP e attivare Apache e MySQL
 - Accedere a phpMyAdmin (http://localhost/phpmyadmin)
-- Eseguire il file createSb.sql fornito con il progetto per creare e popolare il database con la tabella events
+- Eseguire il file createDb.sql fornito con il progetto per creare e popolare il database con la tabella events
 - Copiare la cartella api/ fornita in:
   - C:\xampp\htdocs\eventradar-api\
 - Verificare che l'API sia accessibile via browser:
